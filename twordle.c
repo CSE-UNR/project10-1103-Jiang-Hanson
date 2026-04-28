@@ -12,10 +12,10 @@ int get_word(const char file_name[], char word[]); // 	written 	checked
 void get_guess(int guess_length, int num_guesses, int turn, char guess[]); // 	written 	checked
 void lower_guess(int guess_length, char guess[]); // 	written 	checked
 bool check_win(int guess_length, const char guess[], const char word[]); // 	written 	checked
-void check_capital(int guess_length, char guess[], const char word[]);
-void check_arrows(int guess_length, const char guess[], const char word[], char arrows_line[]);
-void display_line(int line_length, const char line[]);
-void display_guess_history(int num_guesses, int guess_length, const char guesses[][guess_length], const char arrows_lines[][guess_length]);
+void check_capital(int guess_length, char guess[], const char word[]); // 	written 	checked
+void check_arrows(int guess_length, const char guess[], const char word[], char arrows_line[]); // 	written 	checked
+void display_line(int line_length, const char line[]); // 	written
+void display_guess_history(int turn, int guess_length, const char guesses[][guess_length], const char arrows_lines[][guess_length]); // 	written
 
 int main () {
 	char word[WORD_LEN], guess[WORD_LEN], arrows[WORD_LEN];
@@ -180,5 +180,19 @@ void check_arrows(int guess_length, const char guess[], const char word[], char 
 		} else {
 			arrows_line[guess_i] = ' ';
 		}
+	}
+}
+
+void display_line(int line_length, const char line[]) {
+	for (int i = 0; i < line_length; i++) {
+		printf("%c", line[i]);
+	}
+	printf("\n");
+}
+
+void display_guess_history(int turn, int guess_length, const char guesses[][guess_length], const char arrows_lines[][guess_length]) {
+	for (int row = 0; row < turn; row++) {
+		display_line(guess_length, guesses[row]);
+		display_line(guess_length, arrows_lines[row]);
 	}
 }
